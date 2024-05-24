@@ -11,6 +11,16 @@
         "description": "Local server"
       }
     ],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Endpoints for user authentication"
+      },
+      {
+        "name": "Profile",
+        "description": "Endpoints for managing user profiles"
+      }
+    ],
     "paths": {
       "/auth/register": {
         "post": {
@@ -24,15 +34,31 @@
                   "type": "object",
                   "properties": {
                     "name": {
-                      "type": "string"
+                        "type": "string"
                     },
                     "email": {
-                      "type": "string"
+                        "type": "string"
                     },
                     "password": {
-                      "type": "string"
+                        "type": "string"
+                    },
+                    "avatar": {
+                        "type": "string"
+                    },
+                    "bio": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "isAdmin": {
+                        "type": "boolean"
                     }
-                  }
+                },
+                  "required": ["name", "email", "password"]
                 }
               }
             }
@@ -64,7 +90,8 @@
                     "password": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": ["email", "password"]
                 }
               }
             }
@@ -188,6 +215,84 @@
               "description": "Unauthorized"
             }
           }
+        }
+      },
+      "/admin/profiles": {
+        "get": {
+          "summary": "Get user profile",
+          "tags": ["Profile"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User profile retrieved successfully"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user profile",
+          "tags": ["Profile"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User profile updated successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
         }
       }
     }
