@@ -1,0 +1,195 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Enhanced Authentication API",
+      "version": "1.0.0",
+      "description": "API for user authentication with public/private profile feature"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000/api",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/auth/register": {
+        "post": {
+          "summary": "Register a new user",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User registered successfully"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary": "Login a user",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User logged in successfully"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/logout": {
+        "post": {
+          "summary": "Logout a user",
+          "tags": ["Auth"],
+          "responses": {
+            "200": {
+              "description": "User logged out successfully"
+            }
+          }
+        }
+      },
+      "/auth/google": {
+        "get": {
+          "summary": "Authenticate with Google",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects to Google authentication"
+            }
+          }
+        }
+      },
+      "/auth/google/callback": {
+        "get": {
+          "summary": "Google authentication callback",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects on successful authentication"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/facebook": {
+        "get": {
+          "summary": "Authenticate with Facebook",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects to Facebook authentication"
+            }
+          }
+        }
+      },
+      "/auth/facebook/callback": {
+        "get": {
+          "summary": "Facebook authentication callback",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects on successful authentication"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/twitter": {
+        "get": {
+          "summary": "Authenticate with Twitter",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects to Twitter authentication"
+            }
+          }
+        }
+      },
+      "/auth/twitter/callback": {
+        "get": {
+          "summary": "Twitter authentication callback",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects on successful authentication"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/github": {
+        "get": {
+          "summary": "Authenticate with GitHub",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects to GitHub authentication"
+            }
+          }
+        }
+      },
+      "/auth/github/callback": {
+        "get": {
+          "summary": "GitHub authentication callback",
+          "tags": ["Auth"],
+          "responses": {
+            "302": {
+              "description": "Redirects on successful authentication"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      }
+    }
+  }
+  
